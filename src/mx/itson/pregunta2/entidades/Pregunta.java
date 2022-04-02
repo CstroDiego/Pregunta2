@@ -66,10 +66,9 @@ public class Pregunta {
     boolean resultado = false;
     try {
       Connection conexion = Conexion.obtener();
-      String query = "INSERT INTO tblPregunta (pregunta, estado) VALUES (?, ?)";
+      String query = "INSERT INTO tblPregunta (estado) VALUES (?)";
       PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setString(1, pregunta);
-      statement.setString(2, estado);
+      statement.setString(1, estado);
 
       statement.execute();
 

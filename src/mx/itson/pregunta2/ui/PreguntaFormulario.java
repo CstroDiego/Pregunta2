@@ -13,16 +13,18 @@ import javax.swing.*;
  */
 public class PreguntaFormulario extends javax.swing.JDialog {
   int id = 0;
+  String estado = "";
   /** Creates new form PreguntaFormulario */
   public PreguntaFormulario() {
     initComponents();
   }
 
-  public PreguntaFormulario(java.awt.Frame parent, boolean modal, int id) {
+  public PreguntaFormulario(java.awt.Frame parent, boolean modal, int id, String estado) {
     super(parent, modal);
     initComponents();
 
     this.id = id;
+    this.estado = estado;
     cargarFormulario();
   }
 
@@ -30,6 +32,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
     if (this.id != 0) {
       Pregunta p = Pregunta.obtenerPorId(this.id);
       txtPregunta.setText(p.getPregunta());
+      txtEstado.setText(p.getEstado());
     }
   }
 
@@ -45,8 +48,10 @@ public class PreguntaFormulario extends javax.swing.JDialog {
     txtPregunta = new javax.swing.JTextField();
     jLabel2 = new javax.swing.JLabel();
     btnAgregar = new javax.swing.JButton();
+    jLabel3 = new javax.swing.JLabel();
+    txtEstado = new javax.swing.JTextField();
 
-    jLabel1.setText("Agregar nueva pregunta");
+    jLabel1.setText("Pregunta");
 
     jLabel2.setText("Pregunta: ");
 
@@ -58,6 +63,8 @@ public class PreguntaFormulario extends javax.swing.JDialog {
           }
         });
 
+    jLabel3.setText("Estado");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -66,30 +73,53 @@ public class PreguntaFormulario extends javax.swing.JDialog {
             .addGroup(
                 layout
                     .createSequentialGroup()
-                    .addGap(118, 118, 118)
-                    .addComponent(jLabel1)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(
-                layout
-                    .createSequentialGroup()
-                    .addContainerGap()
                     .addGroup(
                         layout
                             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(
-                                layout
-                                    .createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtPregunta))
-                            .addGroup(
                                 javax.swing.GroupLayout.Alignment.TRAILING,
                                 layout
                                     .createSequentialGroup()
-                                    .addGap(307, 307, 307)
-                                    .addComponent(btnAgregar)))
-                    .addContainerGap()));
+                                    .addContainerGap()
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtEstado)
+                                            .addComponent(
+                                                txtPregunta,
+                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(
+                                                layout
+                                                    .createSequentialGroup()
+                                                    .addGap(0, 307, Short.MAX_VALUE)
+                                                    .addComponent(btnAgregar))))
+                            .addGroup(
+                                layout
+                                    .createSequentialGroup()
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(
+                                                layout
+                                                    .createSequentialGroup()
+                                                    .addContainerGap()
+                                                    .addComponent(jLabel2))
+                                            .addGroup(
+                                                layout
+                                                    .createSequentialGroup()
+                                                    .addContainerGap()
+                                                    .addComponent(jLabel3)))
+                                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
+            .addGroup(
+                javax.swing.GroupLayout.Alignment.TRAILING,
+                layout
+                    .createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(170, 170, 170)));
     layout.setVerticalGroup(
         layout
             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,17 +128,23 @@ public class PreguntaFormulario extends javax.swing.JDialog {
                     .createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel1)
-                    .addGap(27, 27, 27)
-                    .addGroup(
-                        layout
-                            .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(
-                                txtPregunta,
-                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                    .addGap(30, 30, 30)
+                    .addComponent(jLabel2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(
+                        txtPregunta,
+                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                        30,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(
+                        txtEstado,
+                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                        30,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(btnAgregar)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
@@ -120,7 +156,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnAgregarActionPerformed
 
     String pregunta = txtPregunta.getText();
-    String estado = "Abierta";
+    String estado = txtEstado.getText();
 
     boolean resultado =
         this.id == 0
@@ -176,7 +212,8 @@ public class PreguntaFormulario extends javax.swing.JDialog {
     java.awt.EventQueue.invokeLater(
         new Runnable() {
           public void run() {
-            PreguntaFormulario dialog = new PreguntaFormulario(new javax.swing.JFrame(), true, 0);
+            PreguntaFormulario dialog =
+                new PreguntaFormulario(new javax.swing.JFrame(), true, 0, "");
             dialog.addWindowListener(
                 new java.awt.event.WindowAdapter() {
                   @Override
@@ -193,6 +230,8 @@ public class PreguntaFormulario extends javax.swing.JDialog {
   private javax.swing.JButton btnAgregar;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JTextField txtEstado;
   private javax.swing.JTextField txtPregunta;
   // End of variables declaration//GEN-END:variables
 }

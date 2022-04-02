@@ -6,6 +6,7 @@ package mx.itson.pregunta2.ui;
 
 import mx.itson.pregunta2.entidades.Pregunta;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -199,24 +200,63 @@ public class PreguntaListado extends javax.swing.JFrame {
 
   private void btnAgregarActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnAgregarActionPerformed
-    PreguntaFormulario formulario = new PreguntaFormulario(this, true, 0);
+    PreguntaFormulario formulario = new PreguntaFormulario(this, true, 0, "");
     formulario.setVisible(true);
     cargar("");
   } // GEN-LAST:event_btnAgregarActionPerformed
 
   private void btnActualizarActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnActualizarActionPerformed
-    // TODO add your handling code here:
+    int renglon = tblPreguntas.getSelectedRow();
+    String id = tblPreguntas.getModel().getValueAt(renglon, 0).toString();
+    String estado = tblPreguntas.getModel().getValueAt(renglon, 2).toString();
+
+    PreguntaFormulario formulario =
+        new PreguntaFormulario(this, true, Integer.parseInt(id), estado);
+    formulario.setVisible(true);
+    cargar("");
   } // GEN-LAST:event_btnActualizarActionPerformed
 
   private void btnEliminarActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnEliminarActionPerformed
-    // TODO add your handling code here:
+    int renglon = tblPreguntas.getSelectedRow();
+    String id = tblPreguntas.getModel().getValueAt(renglon, 0).toString();
+
+    int resp =
+        JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Alerta!", JOptionPane.YES_NO_OPTION);
+    if (resp == JOptionPane.YES_OPTION) {
+      Pregunta.eliminar(Integer.parseInt(id));
+      JOptionPane.showMessageDialog(
+          null,
+          "Pregunta eliminada de la base de datos",
+          "Exito!",
+          JOptionPane.INFORMATION_MESSAGE);
+    } else {
+      JOptionPane.showMessageDialog(
+          null,
+          "No se ha borrado ningún registro de la base de datos",
+          "Error",
+          JOptionPane.WARNING_MESSAGE);
+    }
+
+    cargar("");
   } // GEN-LAST:event_btnEliminarActionPerformed
 
   private void btnRespuestasActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnRespuestasActionPerformed
-    // TODO add your handling code here:
+    int renglon = tblPreguntas.getSelectedRow();
+    String idPregunta = tblPreguntas.getModel().getValueAt(renglon, 0).toString();
+    String estado = tblPreguntas.getModel().getValueAt(renglon, 2).toString();
+
+    if (estado.equals("Abierta")) {
+      RespuestaListado respuestas = new RespuestaListado(Integer.parseInt(idPregunta));
+      respuestas.setVisible(true);
+
+      this.dispose();
+    } else {
+      JOptionPane.showMessageDialog(
+          this, "La pregunta ya no está disponible", "Error", JOptionPane.ERROR_MESSAGE);
+    }
   } // GEN-LAST:event_btnRespuestasActionPerformed
 
   private void formWindowOpened(
