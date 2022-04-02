@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pregunta {
+
   private int id;
   private String pregunta;
   private String estado;
@@ -19,12 +20,10 @@ public class Pregunta {
     List<Pregunta> preguntas = new ArrayList<>();
     try {
       Connection conexion = Conexion.obtener();
-
       PreparedStatement statement =
-              conexion.prepareStatement(
-                      "SELECT id, descripcion, estado FROM pregunta WHERE estado like ?");
+          conexion.prepareStatement(
+              "SELECT id, pregunta, estado FROM tblPregunta WHERE pregunta like ?");
       statement.setString(1, "%" + filtro + "%");
-
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next()) {
@@ -39,7 +38,6 @@ public class Pregunta {
     } catch (SQLException ex) {
       System.err.println("Error: " + ex.getMessage());
     }
-
     return preguntas;
   }
 
@@ -47,7 +45,7 @@ public class Pregunta {
     Pregunta pregunta = new Pregunta();
     try {
       Connection conexion = Conexion.obtener();
-      String query = "SELECT id, descripcion, estado  FROM pregunta where id = ?";
+      String query = "SELECT id, pregunta, estado  FROM tblPregunta where id = ?";
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setInt(1, id);
 
@@ -68,7 +66,7 @@ public class Pregunta {
     boolean resultado = false;
     try {
       Connection conexion = Conexion.obtener();
-      String query = "INSERT INTO pregunta (descripcion, estado) VALUES (?, ?)";
+      String query = "INSERT INTO tblPregunta (pregunta, estado) VALUES (?, ?)";
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setString(1, pregunta);
       statement.setString(2, estado);
@@ -88,7 +86,7 @@ public class Pregunta {
     boolean resultado = false;
     try {
       Connection conexion = Conexion.obtener();
-      String query = "UPDATE pregunta SET descripcion = ?, estado= ? WHERE id = ?";
+      String query = "UPDATE tblPregunta SET pregunta = ?, estado= ? WHERE id = ?";
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setString(1, pregunta);
       statement.setString(2, estado);
@@ -108,7 +106,7 @@ public class Pregunta {
 
     try {
       Connection conexion = Conexion.obtener();
-      String query = "DELETE FROM pregunta WHERE id = ?";
+      String query = "DELETE FROM tblPregunta WHERE id = ?";
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setInt(1, id);
       statement.execute();
