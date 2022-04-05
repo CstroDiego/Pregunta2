@@ -22,13 +22,16 @@ public class RespuestaFormulario extends javax.swing.JDialog {
   /** Fecha de creación. */
   Date fechaCreacion = new Date(System.currentTimeMillis());
 
+  /** The Estado. */
+  String estado = "";
+
   /** Instancia para inicializar componentes. */
   public RespuestaFormulario() {
     initComponents();
   }
 
   /**
-   * Instancia para inicializar componentes como modal y obtener valores.
+   * Instancia para agregar o editar una pregunta.
    *
    * @param parent El componente padre
    * @param modal Indica si el formulario es modal
@@ -36,9 +39,25 @@ public class RespuestaFormulario extends javax.swing.JDialog {
    */
   public RespuestaFormulario(java.awt.Frame parent, boolean modal, int idPregunta) {
     super(parent, modal);
-    initComponents();
     this.idPregunta = idPregunta;
+    initComponents();
+
     cargarFormulario();
+  }
+
+  /**
+   * Instancia para comprobar el estado de la pregunta.
+   *
+   * @param parent El componente padre
+   * @param modal Indica si el formulario es modal
+   * @param idPregunta Id de la pregunta
+   * @param estado Estado de la pregunta
+   */
+  public RespuestaFormulario(java.awt.Frame parent, boolean modal, int idPregunta, String estado) {
+    super(parent, modal);
+    this.idPregunta = idPregunta;
+    this.estado = estado;
+    initComponents();
   }
 
   /** Obtiene el valor de respuesta. */
@@ -197,7 +216,8 @@ public class RespuestaFormulario extends javax.swing.JDialog {
     java.awt.EventQueue.invokeLater(
         new Runnable() {
           public void run() {
-            RespuestaFormulario dialog = new RespuestaFormulario(new javax.swing.JFrame(), true, 0);
+            RespuestaFormulario dialog =
+                new RespuestaFormulario(new javax.swing.JFrame(), true, 0, "");
             dialog.addWindowListener(
                 new java.awt.event.WindowAdapter() {
                   @Override

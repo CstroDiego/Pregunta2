@@ -264,15 +264,11 @@ public class PreguntaListado extends javax.swing.JFrame {
     String idPregunta = tblPreguntas.getModel().getValueAt(renglon, 0).toString();
     String estado = tblPreguntas.getModel().getValueAt(renglon, 2).toString();
 
-    if (estado.equals("Abierta")) {
-      RespuestaListado respuestas = new RespuestaListado(Integer.parseInt(idPregunta));
-      respuestas.setVisible(true);
+    RespuestaListado respuestas = new RespuestaListado(Integer.parseInt(idPregunta), estado);
+    respuestas.setVisible(true);
 
-      this.dispose();
-    } else {
-      JOptionPane.showMessageDialog(
-          this, "La pregunta ya no está disponible", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+    this.dispose();
+    cargar("");
   } // GEN-LAST:event_btnRespuestasActionPerformed
 
   private void formWindowOpened(

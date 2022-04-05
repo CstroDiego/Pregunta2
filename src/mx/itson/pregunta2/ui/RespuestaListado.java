@@ -2,6 +2,7 @@ package mx.itson.pregunta2.ui;
 
 import mx.itson.pregunta2.entidades.Respuesta;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -15,14 +16,18 @@ public class RespuestaListado extends javax.swing.JFrame {
   /** id de pregunta. */
   int idPregunta;
 
+  /** The Estado. */
+  String estado;
   /**
    * Instancia para inicializar los componentes.
    *
    * @param idPregunta id de pregunta
+   * @param estado the estado
    */
-  public RespuestaListado(int idPregunta) {
+  public RespuestaListado(int idPregunta, String estado) {
 
     this.idPregunta = idPregunta;
+    this.estado = estado;
     initComponents();
   }
 
@@ -164,10 +169,13 @@ public class RespuestaListado extends javax.swing.JFrame {
 
   private void btnAgregarActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnAgregarActionPerformed
+    if (estado.equals("Abierta")) {
+      RespuestaFormulario formulario = new RespuestaFormulario(this, true, idPregunta, estado);
 
-    RespuestaFormulario formulario = new RespuestaFormulario(this, true, idPregunta);
-
-    formulario.setVisible(true);
+      formulario.setVisible(true);
+    } else {
+      JOptionPane.showMessageDialog(this, "La pregunta está cerrada");
+    }
     cargar(idPregunta);
   } // GEN-LAST:event_btnAgregarActionPerformed
 
@@ -223,7 +231,7 @@ public class RespuestaListado extends javax.swing.JFrame {
     java.awt.EventQueue.invokeLater(
         new Runnable() {
           public void run() {
-            RespuestaListado dialog = new RespuestaListado(0);
+            RespuestaListado dialog = new RespuestaListado(0, "");
             dialog.addWindowListener(
                 new java.awt.event.WindowAdapter() {
                   @Override
