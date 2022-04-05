@@ -22,7 +22,7 @@ public class RespuestaFormulario extends javax.swing.JDialog {
   /** Fecha de creación. */
   Date fechaCreacion = new Date(System.currentTimeMillis());
 
-  /** The Estado. */
+  /** El estado de la pregunta. */
   String estado = "";
 
   /** Instancia para inicializar componentes. */
