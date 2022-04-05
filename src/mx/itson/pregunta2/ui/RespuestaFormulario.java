@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
 
-// Falta agregar la fecha de la respuesta, Andrés
-
 /**
  * Interfaz de usuario para agregar o editar un objeto de tipo respuesta.
  *
