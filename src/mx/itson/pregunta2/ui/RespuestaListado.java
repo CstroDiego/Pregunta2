@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package mx.itson.pregunta2.ui;
 
 import mx.itson.pregunta2.entidades.Respuesta;
@@ -10,17 +6,32 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
- * @author diego
+ * Interfaz de usuario para respuesta.
+ *
+ * @author Andrés Uriel López Castillo
+ * @author Diego Castro Arce
  */
 public class RespuestaListado extends javax.swing.JFrame {
-  int idPregunta = 0;
-  /** Creates new form RespuestaListado */
+  /** id de pregunta. */
+  int idPregunta;
+
+  /**
+   * Instancia para inicializar los componentes.
+   *
+   * @param idPregunta id de pregunta
+   */
   public RespuestaListado(int idPregunta) {
 
     this.idPregunta = idPregunta;
     initComponents();
   }
 
+  /**
+   * Obtiene todos los registros de respuesta y los muestra en una tabla además de poderlos filtrar
+   * por respuesta.
+   *
+   * @param idPregunta the id pregunta
+   */
   public void cargar(int idPregunta) {
     Respuesta respuesta = new Respuesta();
     List<Respuesta> respuestas = respuesta.obtener(idPregunta);
@@ -44,7 +55,7 @@ public class RespuestaListado extends javax.swing.JFrame {
 
     jScrollPane1 = new javax.swing.JScrollPane();
     tblRespuestas = new javax.swing.JTable();
-    jLabel1 = new javax.swing.JLabel();
+    lblTitulo = new javax.swing.JLabel();
     btnRegresar = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     jMenu1 = new javax.swing.JMenu();
@@ -69,7 +80,7 @@ public class RespuestaListado extends javax.swing.JFrame {
             new String[] {"ID", "Respuesta", "Fecha de creación", "ID pregunta"}));
     jScrollPane1.setViewportView(tblRespuestas);
 
-    jLabel1.setText("Lista de respuestas");
+    lblTitulo.setText("Lista de respuestas");
 
     btnRegresar.setText("Regresar");
     btnRegresar.addActionListener(
@@ -119,7 +130,7 @@ public class RespuestaListado extends javax.swing.JFrame {
                                 layout
                                     .createSequentialGroup()
                                     .addGap(202, 202, 202)
-                                    .addComponent(jLabel1)
+                                    .addComponent(lblTitulo)
                                     .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(
                                 javax.swing.GroupLayout.Alignment.TRAILING,
@@ -136,7 +147,7 @@ public class RespuestaListado extends javax.swing.JFrame {
                 layout
                     .createSequentialGroup()
                     .addGap(17, 17, 17)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTitulo)
                     .addGap(18, 18, Short.MAX_VALUE)
                     .addComponent(
                         jScrollPane1,
@@ -175,9 +186,11 @@ public class RespuestaListado extends javax.swing.JFrame {
   } // GEN-LAST:event_formWindowOpened
 
   /**
-   * @param args the command line arguments
+   * Main de la interfaz de usuario.
+   *
+   * @param args Los argumentos de la línea de comandos.
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     /* Set the Nimbus look and feel */
     // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -226,10 +239,10 @@ public class RespuestaListado extends javax.swing.JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem btnAgregar;
   private javax.swing.JButton btnRegresar;
-  private javax.swing.JLabel jLabel1;
   private javax.swing.JMenu jMenu1;
   private javax.swing.JMenuBar jMenuBar1;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JLabel lblTitulo;
   private javax.swing.JTable tblRespuestas;
   // End of variables declaration//GEN-END:variables
-}
+} // Fin de la clase RespuestaListado

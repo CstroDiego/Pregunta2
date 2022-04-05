@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package mx.itson.pregunta2.ui;
 
 import mx.itson.pregunta2.entidades.Pregunta;
@@ -9,16 +5,31 @@ import mx.itson.pregunta2.entidades.Pregunta;
 import javax.swing.*;
 
 /**
- * @author diego
+ * Interfaz de usuario para agregar o editar un objeto de tipo pregunta.
+ *
+ * @author Diego Castro Arce
+ * @author Andrés Uriel López Castillo
  */
 public class PreguntaFormulario extends javax.swing.JDialog {
+  /** id de la pregunta. */
   int id = 0;
+
+  /** Estado de la pregunta. */
   String estado = "";
-  /** Creates new form PreguntaFormulario */
+
+  /** Instancia de PreguntaFormulario para cargar componentes. */
   public PreguntaFormulario() {
     initComponents();
   }
 
+  /**
+   * Instancia de PreguntaFormulario para cargar componentes en forma de modal.
+   *
+   * @param parent El componente padre
+   * @param modal Indica si el formulario es modal
+   * @param id El id de la pregunta
+   * @param estado El estado de la pregunta
+   */
   public PreguntaFormulario(java.awt.Frame parent, boolean modal, int id, String estado) {
     super(parent, modal);
     initComponents();
@@ -28,6 +39,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
     cargarFormulario();
   }
 
+  /** Obtiene los valores de pregunta y estado. */
   public void cargarFormulario() {
     if (this.id != 0) {
       Pregunta p = Pregunta.obtenerPorId(this.id);
@@ -44,16 +56,16 @@ public class PreguntaFormulario extends javax.swing.JDialog {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jLabel1 = new javax.swing.JLabel();
+    lblTitulo = new javax.swing.JLabel();
     txtPregunta = new javax.swing.JTextField();
-    jLabel2 = new javax.swing.JLabel();
+    lblPregunta = new javax.swing.JLabel();
     btnAgregar = new javax.swing.JButton();
-    jLabel3 = new javax.swing.JLabel();
+    lblEstado = new javax.swing.JLabel();
     txtEstado = new javax.swing.JTextField();
 
-    jLabel1.setText("Pregunta");
+    lblTitulo.setText("Pregunta");
 
-    jLabel2.setText("Pregunta: ");
+    lblPregunta.setText("Pregunta: ");
 
     btnAgregar.setText("Guardar");
     btnAgregar.addActionListener(
@@ -63,7 +75,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
           }
         });
 
-    jLabel3.setText("Estado");
+    lblEstado.setText("Estado");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -73,27 +85,18 @@ public class PreguntaFormulario extends javax.swing.JDialog {
             .addGroup(
                 layout
                     .createSequentialGroup()
+                    .addContainerGap()
                     .addGroup(
                         layout
                             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPregunta)
                             .addGroup(
                                 javax.swing.GroupLayout.Alignment.TRAILING,
                                 layout
                                     .createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(
-                                        layout
-                                            .createParallelGroup(
-                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtEstado)
-                                            .addComponent(
-                                                txtPregunta,
-                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(
-                                                layout
-                                                    .createSequentialGroup()
-                                                    .addGap(0, 307, Short.MAX_VALUE)
-                                                    .addComponent(btnAgregar))))
+                                    .addGap(0, 307, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar))
                             .addGroup(
                                 layout
                                     .createSequentialGroup()
@@ -101,16 +104,8 @@ public class PreguntaFormulario extends javax.swing.JDialog {
                                         layout
                                             .createParallelGroup(
                                                 javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(
-                                                layout
-                                                    .createSequentialGroup()
-                                                    .addContainerGap()
-                                                    .addComponent(jLabel2))
-                                            .addGroup(
-                                                layout
-                                                    .createSequentialGroup()
-                                                    .addContainerGap()
-                                                    .addComponent(jLabel3)))
+                                            .addComponent(lblPregunta)
+                                            .addComponent(lblEstado))
                                     .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap())
             .addGroup(
@@ -118,7 +113,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
                 layout
                     .createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTitulo)
                     .addGap(170, 170, 170)));
     layout.setVerticalGroup(
         layout
@@ -127,9 +122,9 @@ public class PreguntaFormulario extends javax.swing.JDialog {
                 layout
                     .createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel1)
+                    .addComponent(lblTitulo)
                     .addGap(30, 30, 30)
-                    .addComponent(jLabel2)
+                    .addComponent(lblPregunta)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(
                         txtPregunta,
@@ -137,7 +132,7 @@ public class PreguntaFormulario extends javax.swing.JDialog {
                         30,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addComponent(jLabel3)
+                    .addComponent(lblEstado)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(
                         txtEstado,
@@ -176,10 +171,13 @@ public class PreguntaFormulario extends javax.swing.JDialog {
       dispose();
     } // GEN-LAST:event_btnAgregarActionPerformed
   }
+
   /**
-   * @param args the command line arguments
+   * Main de la interfaz de usuario.
+   *
+   * @param args Los argumentos de la línea de comandos.
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     /* Set the Nimbus look and feel */
     // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -228,10 +226,10 @@ public class PreguntaFormulario extends javax.swing.JDialog {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnAgregar;
-  private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel2;
-  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel lblEstado;
+  private javax.swing.JLabel lblPregunta;
+  private javax.swing.JLabel lblTitulo;
   private javax.swing.JTextField txtEstado;
   private javax.swing.JTextField txtPregunta;
   // End of variables declaration//GEN-END:variables
-}
+} // Fin de la clase PreguntaFormulario

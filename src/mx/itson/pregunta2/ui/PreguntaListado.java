@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package mx.itson.pregunta2.ui;
 
 import mx.itson.pregunta2.entidades.Pregunta;
@@ -11,13 +7,33 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
- * @author diego
+ * Interfaz de usuario para pregunta.
+ *
+ * @author Diego Castro Arce
+ * @author Andrés Uriel López Castillo
  */
 public class PreguntaListado extends javax.swing.JFrame {
 
-  /** Creates new form PreguntaListado */
+  /** Instancia de PreguntaListado para inicializar los componentes. */
   public PreguntaListado() {
     initComponents();
+  }
+
+  /**
+   * Obtiene todos los registros de pregunta y los muestra en una tabla además de poderlos filtrar
+   * por pregunta.
+   *
+   * @param filtro El filtro que se aplicará a la tabla.
+   */
+  public void cargar(String filtro) {
+    Pregunta pregunta = new Pregunta();
+    List<Pregunta> preguntas = pregunta.obtener(filtro);
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblPreguntas.getModel();
+    modeloTabla.setRowCount(0);
+
+    for (Pregunta p : preguntas) {
+      modeloTabla.addRow(new Object[] {p.getId(), p.getPregunta(), p.getEstado()});
+    }
   }
 
   /**
@@ -31,8 +47,8 @@ public class PreguntaListado extends javax.swing.JFrame {
     jScrollPane1 = new javax.swing.JScrollPane();
     tblPreguntas = new javax.swing.JTable();
     txtFiltro = new javax.swing.JTextField();
-    jLabel1 = new javax.swing.JLabel();
-    jLabel2 = new javax.swing.JLabel();
+    lblPregunta = new javax.swing.JLabel();
+    lblTitulo = new javax.swing.JLabel();
     btnBuscar = new javax.swing.JButton();
     jMenuBar1 = new javax.swing.JMenuBar();
     btnMenu = new javax.swing.JMenu();
@@ -67,9 +83,9 @@ public class PreguntaListado extends javax.swing.JFrame {
           }
         });
 
-    jLabel1.setText("Pregunta");
+    lblPregunta.setText("Pregunta");
 
-    jLabel2.setText("Listado de preguntas");
+    lblTitulo.setText("Listado de preguntas");
 
     btnBuscar.setText("Buscar");
     btnBuscar.addActionListener(
@@ -141,7 +157,7 @@ public class PreguntaListado extends javax.swing.JFrame {
                             .addGroup(
                                 layout
                                     .createSequentialGroup()
-                                    .addComponent(jLabel1)
+                                    .addComponent(lblPregunta)
                                     .addPreferredGap(
                                         javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtFiltro)
@@ -153,7 +169,7 @@ public class PreguntaListado extends javax.swing.JFrame {
                 layout
                     .createSequentialGroup()
                     .addContainerGap(343, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblTitulo)
                     .addGap(342, 342, 342)));
     layout.setVerticalGroup(
         layout
@@ -163,7 +179,7 @@ public class PreguntaListado extends javax.swing.JFrame {
                 layout
                     .createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel2)
+                    .addComponent(lblTitulo)
                     .addPreferredGap(
                         javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                     .addGroup(
@@ -174,7 +190,7 @@ public class PreguntaListado extends javax.swing.JFrame {
                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
+                            .addComponent(lblPregunta)
                             .addComponent(btnBuscar))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(
@@ -229,7 +245,7 @@ public class PreguntaListado extends javax.swing.JFrame {
       JOptionPane.showMessageDialog(
           null,
           "Pregunta eliminada de la base de datos",
-          "Exito!",
+          "¡Éxito!",
           JOptionPane.INFORMATION_MESSAGE);
     } else {
       JOptionPane.showMessageDialog(
@@ -266,9 +282,11 @@ public class PreguntaListado extends javax.swing.JFrame {
   } // GEN-LAST:event_formWindowOpened
 
   /**
-   * @param args the command line arguments
+   * Main de la interfaz de usuario.
+   *
+   * @param args Los argumentos de la línea de comandos.
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     /* Set the Nimbus look and feel */
     // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -306,17 +324,6 @@ public class PreguntaListado extends javax.swing.JFrame {
         });
   }
 
-  public void cargar(String filtro) {
-    Pregunta pregunta = new Pregunta();
-    List<Pregunta> preguntas = pregunta.obtener(filtro);
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblPreguntas.getModel();
-    modeloTabla.setRowCount(0);
-
-    for (Pregunta p : preguntas) {
-      modeloTabla.addRow(new Object[] {p.getId(), p.getPregunta(), p.getEstado()});
-    }
-  }
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem btnActualizar;
   private javax.swing.JMenuItem btnAgregar;
@@ -324,11 +331,11 @@ public class PreguntaListado extends javax.swing.JFrame {
   private javax.swing.JMenuItem btnEliminar;
   private javax.swing.JMenu btnMenu;
   private javax.swing.JMenuItem btnRespuestas;
-  private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel2;
   private javax.swing.JMenuBar jMenuBar1;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JLabel lblPregunta;
+  private javax.swing.JLabel lblTitulo;
   private javax.swing.JTable tblPreguntas;
   private javax.swing.JTextField txtFiltro;
   // End of variables declaration//GEN-END:variables
-}
+} // Fin de la clase PreguntaListado
